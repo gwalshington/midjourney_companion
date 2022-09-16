@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+
 
 class PaymentContainer extends Component {
 
@@ -8,10 +9,6 @@ class PaymentContainer extends Component {
 
     this.promptItem = this.promptItem.bind(this)
     this.renderUpgradeReason = this.renderUpgradeReason.bind(this)
-  }
-
-  componentDidMount() {
-    console.log(this.props)
   }
 
   renderUpgradeReason(text) {
@@ -41,7 +38,6 @@ class PaymentContainer extends Component {
           }
           <Text style={{fontFamily: 'Rubik-Bold', justifyContent: 'flex-end', marginTop: 5, color: 'white', fontSize: 40}}>{price}</Text>
           <Text style={{fontFamily: 'Rubik-Light', justifyContent: 'flex-end',  color: 'white'}}>{frequency}</Text>
-
       </TouchableOpacity>
     )
   }
@@ -67,7 +63,6 @@ class PaymentContainer extends Component {
           {this.promptItem('$30', 'yearly')}
         </View>
       </View>
-
     );
   }
 }

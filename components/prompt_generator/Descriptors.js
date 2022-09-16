@@ -5,7 +5,6 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
 import { faClose } from '@fortawesome/free-solid-svg-icons/faClose'
 
 const Descriptors = (props) => {
-  console.log(props.descriptors)
   function showItems() {
     return props.descriptors.map((item, index) => {
       return(

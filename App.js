@@ -4,8 +4,15 @@ import { StyleSheet, Text, View } from 'react-native';
 import Router from './Router'
 import * as Font from 'expo-font';
 import Loader from './components/common/Loader'
+import ReduxThunk from 'redux-thunk';
+import reducers from './reducers';
+import { Provider, connect } from 'react-redux';
 
-export default class App extends React.Component {
+import { createStore, applyMiddleware } from 'redux';
+
+
+
+class App extends React.Component {
 
   constructor(props) {
     super(props)
@@ -16,12 +23,14 @@ export default class App extends React.Component {
   }
 
   async componentDidMount() {
+
     await Font.loadAsync({
       'Poppins-ExtraBold': require('./assets/fonts/Rubik-ExtraBold.ttf'),
       'Rubik-SemiBold': require('./assets/fonts/Rubik-SemiBold.ttf'),
       'Rubik-Bold': require('./assets/fonts/Rubik-Bold.ttf'),
       'Rubik-Light': require('./assets/fonts/Rubik-Light.ttf'),
       'Rubik-Regular': require('./assets/fonts/Rubik-Regular.ttf'),
+      'Rubik-Medium': require('./assets/fonts/Rubik-Medium.ttf'),
     });
     await this.setState({
       loaded: true
@@ -31,14 +40,22 @@ export default class App extends React.Component {
     if(!this.state.loaded) {
       return <Loader />
     }
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
+
     return (
       <View style={{flex:1, backgroundColor: 'white', fontFamily: 'Rubik-Regular'}}>
           <StatusBar hidden={true}/>
-          <Router />
+          <Provider store={store}>
+            <Router />
+          </Provider>
       </View>
     );
   }
 }
+
+
+export default App;
+
 
 const styles = StyleSheet.create({
   container: {
